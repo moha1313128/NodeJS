@@ -1,0 +1,19 @@
+{
+  "name": "nodejs",
+  "version": "1.0.0",
+  "description": "Full Course In Node JS (MVC, REST API, GraphQL, Deno)",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moha1313128/NodeJS.git"
+  },
+  "author": "Mohamed ETTAYBY",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moha1313128/NodeJS/issues"
+  },
+  "homepage": "https://github.com/moha1313128/NodeJS#readme"
+}
