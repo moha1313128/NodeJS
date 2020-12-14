@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/moha1313128/NodeJS/issues"
   },
-  "homepage": "https://github.com/moha1313128/NodeJS#readme"
+  "homepage": "https://github.com/moha1313128/NodeJS#readme",
+  "devDependencies": {
+    "express": "^4.17.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0"
+  }
 }
