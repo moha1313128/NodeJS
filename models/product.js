@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { get } = require("https");
+// const { get } = require("https");
 const path = require("path");
 
 const p = path.join(
@@ -10,17 +10,20 @@ const p = path.join(
 const getProductsFromFile = (cb) => {
   fs.readFile(p, (err, data) => {
     if (err) {
-      return cb([]);
+      cb([]);
     } else {
-      return cb(JSON.parse(data));
+      cb(JSON.parse(data));
     }
   });
   // return products;
 };
 
 module.exports = class Product {
-  constructor(title) {
+  constructor(title, imageUrl, price, description) {
     this.title = title;
+    this.imageUrl = imageUrl;
+    this.price = price;
+    this.description = description;
   }
   save() {
     // products.push(this);
