@@ -4,20 +4,22 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
+const csrf = require("csurf");
+const flash = require("connect-flash");
 
 const User = require("./models/user");
 const errorController = require("./controllers/error");
 
 const MONGODB_URI =
-  "mongodb://moha1313128:dTqwg3jZ6u1yq5PO@cluster0-shard-00-00.ofvtk.mongodb.net:27017,cluster0-shard-00-01.ofvtk.mongodb.net:27017,cluster0-shard-00-02.ofvtk.mongodb.net:27017/shop?ssl=true&replicaSet=atlas-qst63q-shard-0&authSource=admin&retryWrites=true&w=majority";
-
+  // "mongodb://moha1313128:dTqwg3jZ6u1yq5PO@cluster0-shard-00-00.ofvtk.mongodb.net:27017,cluster0-shard-00-01.ofvtk.mongodb.net:27017,cluster0-shard-00-02.ofvtk.mongodb.net:27017/shop?ssl=true&replicaSet=atlas-qst63q-shard-0&authSource=admin&retryWrites=true&w=majority";
+  "mongodb://localhost:27017/shop";
 const app = express();
 const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: "sessions",
   // expires
 });
-
+const csrfProtection = csrf();
 app.set("view engine", "ejs");
 app.set("views", "views");
 
@@ -36,6 +38,9 @@ app.use(
   }) // we can configure cookie here also
 );
 
+app.use(csrfProtection);
+app.use(flash());
+
 app.use((req, res, next) => {
   if (!req.session.user) {
     return next();
@@ -46,6 +51,12 @@ app.use((req, res, next) => {
       next();
     })
     .catch((err) => console.log(err));
+});
+
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.session.isLoggedIn;
+  res.locals.csrfToken = req.csrfToken();
+  next();
 });
 
 app.use("/admin", adminRoutes);
@@ -61,16 +72,16 @@ mongoose
     useFindAndModify: true,
   })
   .then((result) => {
-    User.findOne().then((user) => {
-      if (!user) {
-        const user = new User({
-          name: "Max",
-          email: "max@gmail.com",
-          cart: { items: [] },
-        });
-        user.save();
-      }
-    });
+    // User.findOne().then((user) => {
+    //   if (!user) {
+    //     const user = new User({
+    //       name: "Max",
+    //       email: "max@gmail.com",
+    //       cart: { items: [] },
+    //     });
+    //     user.save();
+    //   }
+    // });
     console.log("Connected");
     app.listen(3000);
   })

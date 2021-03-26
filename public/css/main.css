@@ -234,3 +234,28 @@ form {
     display: none;
   }
 }
+.user-message {
+  margin: auto;
+  width: 90%;
+  border: 1px solid rgb(66, 4, 124);
+  background-color: blueviolet;
+  padding: 0.5rem;
+  border-radius: 5%;
+  text-align: center;
+}
+.user-message--error {
+  border-color: rgb(182, 6, 6);
+  background: rgb(243, 109, 109);
+}
+
+@media (min-width: 768px) {
+  .main-header__nav {
+    display: flex;
+  }
+  #side-menu-toggle {
+    display: none;
+  }
+  .use-message {
+    width: 30rem;
+  }
+}
