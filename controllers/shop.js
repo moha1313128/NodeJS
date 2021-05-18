@@ -1,5 +1,6 @@
 const Product = require("../models/product");
 const Order = require("../models/order");
+const { validationResult } = require("express-validator");
 
 exports.getProducts = (req, res, next) => {
   Product.find()
